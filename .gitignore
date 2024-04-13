@@ -75,7 +75,7 @@ Plugins/*/Intermediate/*
 DerivedDataCache/*
 
 # Art Resource Folder
-/Content/Resource/*
+/Content/Resources/*
 
 # Build
 Windows/*
