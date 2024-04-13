@@ -1,9 +1,17 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+/*=============================================================================
+ * Filename: P1Player.cpp
+ * Author: pcyoung
+ * Date Created: 2024.04.13
+ * Last Modified by: [Last Modifier's Name]
+ * Last Modified on: [Last Modification Date]
+ * Description: Player ÇÙ½É Class
+=============================================================================*/
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "InputActionValue.h"
 #include "P1Player.generated.h"
 
 UCLASS()
@@ -12,24 +20,34 @@ class P1_API AP1Player : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AP1Player();
 
+	//Main Rootine
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	//Input
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	//Input
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Camera", meta=(AllowPrivateAccess = "true"))
-	TObjectPtr<class USpringArmComponent> SpringArm;
+	TObjectPtr<class USpringArmComponent> CameraBoom;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Camera", meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<class UCameraComponent> FollowCamera;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputMappingContext> DefaultMappingContext;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputAction> MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<class UInputAction> LookAction;
+
+protected:
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 };
