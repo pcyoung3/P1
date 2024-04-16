@@ -24,14 +24,14 @@ AP1Player::AP1Player()
 
 
 	//Camera Setting
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.f;
 	CameraBoom->bUsePawnControlRotation = true;
 
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-	CameraBoom->bUsePawnControlRotation = false;
+	FollowCamera->bUsePawnControlRotation = false;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ void AP1Player::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AP1Player::Move);
 
 		//Look
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AP1Player::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AP1Player::Look);
 	}
 }
 
@@ -85,7 +85,11 @@ void AP1Player::Look(const FInputActionValue& Value)
 	if (Controller != nullptr)
 	{
 		AddControllerYawInput(LookAxisVector.X);
-		AddControllerYawInput(LookAxisVector.Y);
+		AddControllerPitchInput(LookAxisVector.Y);
+
+		//Log Ç¥½Ã
+		//FString str = FString::Printf(TEXT("X : %f, Y : %f "), LookAxisVector.X, LookAxisVector.Y);
+		//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, str);
 	}
 }
 

@@ -1,4 +1,11 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+/*=============================================================================
+ * Filename: P1GameMode.cpp
+ * Author: pcyoung
+ * Date Created: 2024.04.17
+ * Last Modified by: [Last Modifier's Name]
+ * Last Modified on: [Last Modification Date]
+ * Description: Game Base Mode
+=============================================================================*/
 
 #pragma once
 
